@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 int merge(int a,int b,int l){
-    if( l % 2 == 0 )/// OR 
-      ans = a^b;
-    else{int ans = a|b;}
+    int ans;
+    if( l % 2 == 0 )/// XOR 
+     ans = a^b;
+    else ans = a|b; //OR
     return ans;
 }
 void build(int seg[],int a[],int low,int high, int pos,int l){
@@ -50,9 +51,9 @@ int main() {
 	int nextPowOf2 = (int)round(pow(2, ceil(log2(n))));
     int size = 2 * nextPowOf2 - 1;
 	int seg[size];
-	build(seg,a,0,n-1,0);
-	cout<<query(seg,0,n-1,0,n-1,0)<<endl;
-	update(seg,0,0,0,n-1,4,0);
-	cout<<query(seg,0,n-1,0,n-1,0)<<endl;
+	build(seg,a,0,n-1,0,1);
+	cout<<query(seg,0,n-1,0,n-1,0,1)<<endl;
+//	update(seg,0,0,0,n-1,4,0);
+//	cout<<query(seg,0,n-1,0,n-1,0)<<endl;
 	return 0;
 }
