@@ -20,6 +20,20 @@ int query(int seg[],int qlow, int qhigh, int low, int high, int pos){
     int mid = (low+high)/2;
     return min(query(seg,qlow,qhigh,low,mid,2*pos+1),query(seg,qlow,qhigh,mid+1,high,2*pos+2));
 }
+void update(int seg[],int qlow, int qhigh,int low, int high,int val, int pos){//point update
+    if( qlow == low && qhigh == high ){
+        seg[pos]=val;
+        return;
+    }
+    if( low > high )
+        return;
+    if( low > qhigh || high < qlow )
+        return;
+    int mid = (low+high)/2;
+    update(seg,qlow,qhigh,low,mid,val,2*pos+1);
+    update(seg,qlow,qhigh,mid+1,high,val,2*pos+2);
+    seg[pos]=min(seg[2*pos+1],seg[2*pos+2]);
+}
 int main() {
 	int n;///no of elements in seg tree
 	cin>>n;
@@ -30,6 +44,8 @@ int main() {
     int size = 2 * nextPowOf2 - 1;
 	int seg[size];
 	build(seg,a,0,n-1,0);
-	cout<<query(seg,0,n-1,0,n-1,0);
+	cout<<query(seg,0,n-1,0,n-1,0)<<endl;
+	update(seg,0,0,0,n-1,4,0);
+	cout<<query(seg,0,n-1,0,n-1,0)<<endl;
 	return 0;
 }
