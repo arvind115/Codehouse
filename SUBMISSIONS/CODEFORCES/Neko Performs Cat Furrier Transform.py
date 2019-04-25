@@ -1,3 +1,4 @@
+#http://codeforces.com/contest/1152/problem/B
 import math
 l=[]
 for i in range(40):
