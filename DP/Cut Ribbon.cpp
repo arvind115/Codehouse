@@ -2,53 +2,60 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long int  ll;
-
-ll dfs(vector<ll> adj[], bool vis[], ll wt[],ll s, ll x){
-    ll sum = 0;
-    if( vis[s] == false ){ ///unvisited node
-        vis[s] = true;
-        sum += wt[s];
-        for(int i=0; i<adj[s].size(); i++)
-            sum+=dfs(adj,vis,wt,adj[s][i],x);
-    }
-    return max(sum,-x);
-}
 int main(){
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-    int t;
-    cin >> t;
-    while( t-- ){
-        int n,x;
-        cin >> n >> x;
-        vector<ll> adj[n+3];
-        ll wt[n+3];
-        for(int i=1; i<=n; i++)
-            cin >> wt[i];
-        for(int i=0; i<n-1; i++){
-            int u,v;
-            cin >> u >> v;
-            adj[u].push_back(v);
-            adj[v].push_back(u);
+    int n;cin>>n;
+    while(n--){
+        string s;
+        cin >> s;
+        if( s.length() == 1){
+            cout<<s<<endl;
+            continue;
         }
-        bool vis[n+3]={false};
-        ll ans = dfs(adj,vis,wt,1,x);
-        cout<<ans<<"\n";
+        bool noans = false;
+        vector<char> v,v2;
+        v.push_back(s[0]);
+        for(int i=1; i<s.length(); i++){
+            int diff = abs(s[i]- v[v.size()-1]);
+            if( diff != 1){
+                v.push_back(s[i]);
+                continue;
+            }
+            else{
+                if( v2.size() < 1){
+                    v2.push_back(s[i]);
+                    continue;
+                }
+                diff = abs(s[i] - v2[v2.size()-1]);
+                if( diff != 1){
+                    v2.push_back(s[i]);
+                    continue;
+                }
+                else{
+                    noans = true;
+                    break;
+                }
+            }
+        }
+        if( noans )cout<<"No answer\n";
+        else{
+            int diff = abs(v[v.size()-1]-v2[0]);
+            if( diff == 1){
+                cout<<"No answer\n";
+                continue;
+            }
+            for(int i=0; i<v.size(); i++)
+                cout<<v[i];
+            for(int i=0; i<v2.size(); i++)
+                cout<<v2[i];
+            cout<<"\n";
+        }
     }
     return 0;
 }
 /*
-1
-3 5
-1 -5 -10
-1 2
-2 3
-
-
-7 2
-1 2
-1 3
-2 4
-2 5
-3 6
-3 7
+3
+abcd
+gg
+codeforces
 */
