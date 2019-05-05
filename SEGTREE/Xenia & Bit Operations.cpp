@@ -51,7 +51,7 @@ int main() {
 	for(int i=0; i<n; i++)
 	    cin>>a[i];
 	int nextPowOf2 = (int)round(pow(2, ceil(log2(n))));
-    int size = 2 * nextPowOf2 - 1;
+        int size = 2 * nextPowOf2 - 1;
 	int seg[size];
 	build(seg,a,0,n-1,0,1,N);
 	for(int i=0; i<m; i++){
