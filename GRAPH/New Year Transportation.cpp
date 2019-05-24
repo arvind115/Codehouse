@@ -1,4 +1,3 @@
-///http://codeforces.com/problemset/problem/500/A
 #include<bits/stdc++.h>
 using namespace std;
 void dfs(vector<int> adj[], bool vis[], int s ){
