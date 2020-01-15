@@ -18,7 +18,7 @@ int query(int i){
 void dfs(int s){
     if( !vis[s]){
         vis[s] = true;
-        ans += query(min(n,s+k)) - query(max(0,s-k-1));
+        ans += query(s+k) - query(max(0,s-k));
         update(s,1);
         for(int i=0; i<adj[s].size(); i++){
             int child = adj[s][i];
@@ -43,10 +43,9 @@ int main(){
     return 0;
 }
 /*
-6 1
-1 2
-1 3
-3 4
-3 5
-3 6
+5 2
+3 2
+3 1
+1 4 
+1 5
 */
