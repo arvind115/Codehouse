@@ -16,11 +16,11 @@ int qry(int row,int i){
 int indqry(int K, char x){
     int low = 1, high = n,mid,ans;
     while( low <= high ){
-        mid = (low + high)>>1;
-        int sum = qry(x-'a',mid);
-        if( sum >= K){
+        mid = (low + high)/2;
+        if( qry(x-'a',mid) >= K){
             ans = mid;
-            high = mid-1;
+            high = mid-1; ///answer may still be on left side  1 1 0 1 0 0 0 0 1
+                                                            ///1 2 3 4 5 6 7 8 9
         }
         else
             low = mid+1;
@@ -37,11 +37,11 @@ int main(){
         int K; char x;
         cin >> K >> x;
         int ind = indqry(K,x);
-        s[ind-1] = '#';
+        s[ind-1] = '*';
         update(x-'a',ind,-1);
     }
     for(int i = 0; i< s.size(); i++){
-        if( s[i] == '#')continue;
+        if( s[i] == '*')continue;
         cout<<s[i];
     }
     cout << endl;
