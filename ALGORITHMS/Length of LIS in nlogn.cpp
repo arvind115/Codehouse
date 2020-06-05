@@ -2,8 +2,7 @@
 using namespace std;
 typedef long long int ll;
 int lis(vector<int> v){
-    vector<int> last(1,0);
-    last[0] = v[0];
+    vector<int> last(1,v[0]);
     int l = 1; ///point to the empty space in the 'last' vector
     for(int i=1; i<v.size(); i++){
         if( v[i] > last[l-1] ){ ///extend the largest sequence
